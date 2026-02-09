@@ -36,7 +36,8 @@ public class AudioManager : MonoBehaviour
         
         _recycleStrategy = config.recycleStrategy;
         _audioListener = FindAnyObjectByType<AudioListener>();
-        _audioEventPool = new ObjectPool<AudioEvent>(audioEventPrefab, config.GetMaxNumber());
+        _audioEventPool = new ObjectPool<AudioEvent>(audioEventPrefab, config.GetMaxNumber(), transform);
+        _activeEvents = new List<AudioEvent>();
     }
 
     
@@ -110,26 +111,45 @@ public class AudioManager : MonoBehaviour
             case AudioRecycleStrategy.ByTime:
                 var earliest = _playStartTimes.Aggregate((a, b) => a.Value < b.Value ? a : b);
                 target = earliest.Key;
-                Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Time = {earliest.Value}");
+                //Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Time = {earliest.Value}");
                 break;
             case AudioRecycleStrategy.ByVolume:
                 target = _activeEvents
                     .OrderBy(ev => ev.GetVolume())
                     .FirstOrDefault();
-                Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Volume = {target.GetVolume()}");
+                //Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Volume = {target.GetVolume()}");
                 break;
             case AudioRecycleStrategy.ByDistance:
                 var listenerPos = _audioListener.transform.position;
                 target = _activeEvents
                     .OrderBy(ev => Vector3.Distance(ev.GetPosition(), listenerPos))
                     .LastOrDefault();
-                Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Distance = {Vector3.Distance(target.GetPosition(), listenerPos)}");
+                //Debug.Log($"Audio Manager : Audio Event Recycled : Strategy = {_recycleStrategy} : Distance = {Vector3.Distance(target.GetPosition(), listenerPos)}");
                 break;
         }
         
         if (target) Stop(target);
     }
 
+
+    /// <summary>
+    /// Set the current recycle strategy at run time
+    /// </summary>
+    /// <param name="strategy"></param>
+    public void ResetStrategy(AudioRecycleStrategy strategy)
+    {
+        _recycleStrategy = strategy;
+    }
+
+    /// <summary>
+    /// Reset the current recycle strategy to config
+    /// </summary>
+    public void ResetStrategy()
+    {
+        _recycleStrategy = config.recycleStrategy;
+    }
+    
+    
     
     
     

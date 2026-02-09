@@ -1,21 +1,35 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioEvent : MonoBehaviour, IPoolable
 {
-    private AudioSource _audioListener;
-    private float volume = 1f;
+    public event Action OnActive;
+    public event Action OnDeactive;
+    
+    private AudioSource _audioSource;
+    private float _volume = 1f;
+
+
+    private Example _e;
+    
     private void Awake()
     {
-        _audioListener = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void OnSpawn() // Currently empty implementation
     {}
 
     public void OnDespawn() // Currently empty implementation
-    {}
+    {
+        _audioSource.loop = false;
+        _audioSource.volume = 1f;
+        _audioSource.pitch = 1f;
+        _audioSource.spatialBlend = 1f;
+        _audioSource.outputAudioMixerGroup = null;
+    }
 
     /// <summary>
     /// Play audio at specified location.
@@ -35,17 +49,19 @@ public class AudioEvent : MonoBehaviour, IPoolable
         float spatialBlend = 1f,
         AudioMixerGroup mixerGroup = null)
     {
-        _audioListener.clip = clip;
-        _audioListener.loop = loop;
-        _audioListener.volume = volume;
-        _audioListener.pitch = pitch;
-        _audioListener.spatialBlend = spatialBlend;
-        _audioListener.outputAudioMixerGroup = mixerGroup;
+        _audioSource.clip = clip;
+        _audioSource.loop = loop;
+        _audioSource.volume = volume;
+        _audioSource.pitch = pitch;
+        _audioSource.spatialBlend = spatialBlend;
+        _audioSource.outputAudioMixerGroup = mixerGroup;
         
         transform.position = pos;
-        _audioListener.Play();
+        _audioSource.Play();
         
-        this.volume = _audioListener.volume;
+        _volume = _audioSource.volume;
+        
+        OnActive?.Invoke();
     }
 
     /// <summary>
@@ -55,14 +71,20 @@ public class AudioEvent : MonoBehaviour, IPoolable
     /// </summary>
     public void Stop()
     {
-        _audioListener.Stop();
+        _audioSource.Stop();
+        OnDeactive?.Invoke();
+        
+        
+        // This is for debug and showcase
+        // Delete for future use
+        _e.Reset();
     }
     
     /// <summary>
     /// Get current audio clip
     /// </summary>
     /// <returns></returns>
-    public AudioClip GetAudioClip() => _audioListener.clip;
+    public AudioClip GetAudioClip() => _audioSource.clip;
     
     /// <summary>
     /// Get current position
@@ -74,5 +96,27 @@ public class AudioEvent : MonoBehaviour, IPoolable
     /// Get current volume
     /// </summary>
     /// <returns></returns>
-    public float GetVolume() => volume;
+    public float GetVolume() => _volume;
+    
+    /// <summary>
+    /// Get current playing state
+    /// </summary>
+    /// <returns></returns>
+    public bool IsPlaying() => _audioSource.isPlaying;
+
+
+
+    
+    // ----------------------------------------------------------------------
+    // Below are for debug and showcase.
+    // Delete for future use
+    public void SetExample(Example example)
+    {
+        _e = example;
+    }
+
+    public void DebugF()
+    {
+        _e.Reset();
+    }
 }

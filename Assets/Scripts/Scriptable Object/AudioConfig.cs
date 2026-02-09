@@ -29,7 +29,10 @@ public class AudioConfig : ScriptableObject
 
             foreach (var platformObject in objectPerPlatform)
             {
-                _objectsPerPlatformDictionary.Add(platformObject.platform, platformObject);
+                foreach (var runtimePlatform in platformObject.platforms)
+                {
+                    _objectsPerPlatformDictionary.Add(runtimePlatform, platformObject);
+                }
             }
         }
 
@@ -40,6 +43,6 @@ public class AudioConfig : ScriptableObject
 [Serializable]
 public struct PlatformObjectNumber
 {
-    public RuntimePlatform platform;
+    public List<RuntimePlatform> platforms;
     public int number;
 }

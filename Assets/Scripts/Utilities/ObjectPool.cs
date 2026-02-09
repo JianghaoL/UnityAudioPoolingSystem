@@ -26,6 +26,7 @@ public class ObjectPool<T> where T : Component
     {
         if (maxNumber < 0) throw new Exception("Object Pool : Max number must be positive");
         
+        _allObjects = new Queue<T>();
         _prefab = prefab;
         _defaultTransform = defaultTransform;
         _maxNumber = maxNumber;
