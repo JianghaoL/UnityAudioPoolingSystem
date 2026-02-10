@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>[TOC]</p>
+<p><br><br></p>
+<h1 id="%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">简体中文</h1>
+<br>
+<h2 id="unity%E9%9F%B3%E9%A2%91%E6%B1%A0%E7%B3%BB%E7%BB%9F">Unity音频池系统</h2>
+<h3 id="%E6%A6%82%E8%BF%B0">概述</h3>
+<p>本系统实现了Unity中非绑定物体音频播放的池化，给音频设计师提供了：</p>
+<ol>
+<li>可选择的音频实例回收功能</li>
+<li>可自定义的平台特化音频实例数规则</li>
+<li>统一且解耦的AudioManager单例类，用于提供音频播放入口</li>
+<li>AudioEvent类，提供可扩展的音频单例基类</li>
+</ol>
+<p><br> <br></p>
+<h3 id="%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">使用说明</h3>
+<h4 id="audioconfig">AudioConfig</h4>
+<p><code>AudioConfig</code> 定义了音频相关的设置，设计师可以通过<code>Asset (folder) → Scriptable Object → AudioConfig</code> 创建一个Scriptable Object。
+<br></p>
+<h5 id="%E5%AD%97%E6%AE%B5">字段</h5>
+<p>该可编程物体包含了<code>2</code>个<em><strong>公共字段</strong></em>：</p>
+<ol>
+<li><code>AudioRecycleStrategy recycleStrategy</code> 用于定义音频实例的回收策略。本系统提供了<code>3</code>种回收策略，<code>ByTime</code>, <code>ByVolume</code>, 和<code>ByDistance</code>。
+<br>
+<code>ByTime</code> 允许系统按音频播放时间顺序回收实例（按最早开始播放 → 最晚开始播放的顺序）
+<code>ByVolume</code> 允许系统按音频音量排序回收实例（按最小音量 → 最大音量），如果音量相同，随机按默认顺序回收。
+<code>ByDistance</code> 允许系统按音频实例距离玩家位置远近回收（按最远 → 最近），如果距离相同，随机按默认顺序回收。
+<br><br></li>
+<li><code>List&lt;PlatformObjectNumber&gt; objectPerPlatform</code>
+<br>
+该列表允许设计师在Unity检视器内针对各平台设置最大音频实例数。
+<code>struct PlayformObjectNumber</code> 标识了特定平台可以拥有的最大音频实例数。设计师可以在此处选择多种平台以匹配同一个实例数。
+<br></li>
+</ol>
+<h5 id="%E6%96%B9%E6%B3%95">方法</h5>
+<p>该可编程物体还包含了<code>1</code>个<em><strong>公共方法</strong></em>：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetMaxNumber</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法会自动返回已设置的<code>当前平台</code>可持有的最大实例数。</p>
+<pre class="hljs"><code><div>示例
+
+设计师设置：
+    Android &amp; iPhone =&gt; 10
+    Windows &amp; Linux =&gt; 30
+    PS4 &amp; PS5 =&gt; 25
+
+当前运行平台：
+    Windows
+
+GetMaxNumber()：
+    返回 30
+</div></code></pre>
+<p><br> <br><br></p>
+<h4 id="audiomanager">AudioManager</h4>
+<p><code>AudioManager</code> 是一个单例类。设计师可以通过提供配置好的<code>AudioConfig</code>使其按预定方案处理音频相关的事件。
+<br></p>
+<h5 id="%E5%AD%97%E6%AE%B5">字段</h5>
+<p><code>AudioManager</code> 持有<code>2</code>个<em><strong>公共字段</strong></em>：</p>
+<ol>
+<li><code>AudioConfig config</code> 用于配置当前场景内的音频相关设定。设计师可以直接在Unity检视器内将设置好的<code>AudioConfig</code>拖入该字段。
+<br><br></li>
+<li><code>AudioEvent audioEventPrefab</code> 用于生成音频播放实例。设计师可以将任意挂载了<code>AudioEvent</code>组件的预制体拖入该字段。</li>
+</ol>
+<br>
+<h5 id="%E6%96%B9%E6%B3%95">方法</h5>
+<p><code>AudioManager</code> 持有<code>4</code>个<em><strong>公共方法</strong></em>：</p>
+<ol>
+<li><strong>播放</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> AudioEvent <span class="hljs-title">Play</span>(<span class="hljs-params">
+        AudioClip clip,
+        Vector3 position,
+        <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">false</span>,
+        <span class="hljs-keyword">float</span> volume = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> pitch = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> spatialBlend = <span class="hljs-number">1f</span>,
+        AudioMixerGroup mixerGroup = <span class="hljs-literal">null</span></span>)</span>;
+</div></code></pre>
+<p>该方法提供了使用<code>AudioManager</code>播放音频的入口。设计师在调用该方法时，需要传入一个<code>AudioClip</code>和<code>Vector3</code>。其他参数已设置默认值，设计师可按需求填入。</p>
+<p>该方法返回了一个<code>AudioEvent</code>实例，以供处理音频控制。</p>
+<blockquote>
+<p>在使用该方法时，推荐使用一个<code>AudioEvent</code>变量保存持有返回的实例。</p>
+</blockquote>
+<br>
+<ol start="2">
+<li><strong>停止播放</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params">AudioEvent audioEvent</span>)</span>;
+</div></code></pre>
+<p>该方法提供了使用<code>AudioManager</code>停止正在播放音频的入口。设计师在调用该方法时，需要传入一个<code>AudioEvent</code>。</p>
+<p>对于非循环音频，系统会自动管理，并在音频播放结束时回收。尽管如此，设计师也可以通过调用该方法提前结束并回收非循环音频。</p>
+<br>
+<ol start="3">
+<li><strong>手动回收音频实例</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ApplyRecycle</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法提供了使用<code>AudioManager</code>手动回收当前音频实例的入口。</p>
+<p>该方法将按照前文描述的，已设置好的<code>AudioRecycleStrategy</code>策略回收<code>1</code>个<code>AudioEvent</code>实例。</p>
+<blockquote>
+<p>该公共方法被提供给设计师以提供最大限度的自由。尽管如此，并不建议设计师在脚本中单独调用该方法。事实上，<code>Play()</code> 方法的实现中已自动管理了这些实例。</p>
+</blockquote>
+<br>
+<ol start="4">
+<li><strong>手动设置<code>AudioRecycleStrategy</code></strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">// 设置到指定策略</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetStrategy</span>(<span class="hljs-params">AudioRecycleStrategy strategy</span>)</span>;
+
+<span class="hljs-comment">// 重置为Audio Config的策略</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetStrategy</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法提供了使用<code>AudioManager</code>手动设置音频回收策略的入口。使用该入口，设计师可以在运行时更改<code>AudioManager</code>的音频回收策略。</p>
+<p>该方法有<code>2</code>个重载。设计师可以通过传入<code>AudioRecycleStrategy</code>来设置到指定策略，或调用无参数重载以重置到<code>AudioConfig</code>中指定的策略。</p>
+<br>
+<h5 id="%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B">使用示例</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> AudioClip clip; <span class="hljs-comment">// 需要播放的音频</span>
+<span class="hljs-keyword">public</span> Vector3 position; <span class="hljs-comment">// 音频播放位置</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 循环音频</span>
+
+<span class="hljs-keyword">private</span> AudioEvent _e; <span class="hljs-comment">// 私有AudioEvent字段用于存储实例引用</span>
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExampleCallToPlay</span>(<span class="hljs-params"></span>) <span class="hljs-comment">// 播放音频</span></span>
+{
+    _e = AudioManager.Instance.Play(
+        clip,
+        position,
+        loop);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExampleCallToStop</span>(<span class="hljs-params"></span>) <span class="hljs-comment">// 停止该音频的播放</span></span>
+{
+    AudioManager.Instance.Stop(_e);
+}
+
+</div></code></pre>
+<p><br><br></p>
+<h4 id="audioevent">AudioEvent</h4>
+<p><code>AudioEvent</code> 类负责音频的具体播放行为。当<code>AudioManager.Play(...)</code> 被调用时，该类的实例被创建。</p>
+<p><code>AudioEvent</code> 会强制绑定一个<code>AudioSource</code> 到挂载的游戏物体上。该<code>AudioSource</code> 组件负责播放音频。</p>
+<p>该类实现了<code>IPoolable</code> 接口，代表它是可对象池化的类。</p>
+<br>
+<h5 id="%E5%AD%97%E6%AE%B5">字段</h5>
+<p><code>AudioEvent</code> 持有<code>2</code>个<em><strong>公共字段</strong></em>：</p>
+<ol>
+<li><code>OnActive</code> 该事件在<code>AudioEvent</code> 实例激活时被广播。其他脚本可以订阅该事件以在<strong>音频播放</strong>时获得通知。</li>
+<li><code>OnDeactive</code> 该事件在<code>AudioEvent</code> 实例禁用时被广播。其他脚本可以订阅该事件以在<strong>音频停止</strong>时获得通知。</li>
+</ol>
+<p><br><br></p>
+<h5 id="%E6%96%B9%E6%B3%95">方法</h5>
+<p><code>AudioEvent</code> 持有<code>8</code>个<em><strong>公共方法</strong></em>：</p>
+<ol>
+<li><strong>被激活时</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnSpawn</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p><code>IPoolable</code> 接口的实现。该方法在该实例被从对象池中激活时被调用。</p>
+<p>该方法目前为空。</p>
+<br>
+<ol start="2">
+<li><strong>被禁用时</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnDespawn</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p><code>IPoolable</code> 接口的实现。该方法在该实例被禁用并放置回对象池时被调用。</p>
+<p>该方法目前重置所有<code>AudioSource</code> 参数。</p>
+<br>
+<ol start="3">
+<li><strong>播放</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Play</span>(<span class="hljs-params">AudioClip clip,
+        Vector3 pos,
+        <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">false</span>,
+        <span class="hljs-keyword">float</span> volume = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> pitch = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> spatialBlend = <span class="hljs-number">1f</span>,
+        AudioMixerGroup mixerGroup = <span class="hljs-literal">null</span></span>)</span>;
+</div></code></pre>
+<p>该方法将播放传入的音频，并按照传入的参数配置<code>AudioSource</code>。</p>
+<blockquote>
+<p>尽管提供了该方法，设计师应使用<code>AudioManager.Play(...)</code>，而非<code>AudioEvent.Play(...)</code>。</p>
+</blockquote>
+<br>
+<ol start="4">
+<li><strong>停止音频</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法将停止该实例正在播放的音频。</p>
+<blockquote>
+<p>尽管提供了该方法，设计师应使用<code>AudioManager.Stop(AudioEvent)</code>，而非<code>AudioEvent.Stop()</code>。</p>
+</blockquote>
+<br>
+<ol start="5">
+<li><strong>获取当前音频</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> AudioClip <span class="hljs-title">GetAudioClip</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法返回当前正在播放的音频引用。</p>
+<br>
+<ol start="6">
+<li><strong>获取当前位置</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> Vector3 <span class="hljs-title">GetPosition</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>该方法返回当前实例的位置。</p>
+<br>
+<ol start="6">
+<li><strong>获取当前音量</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">GetVolume</span>(<span class="hljs-params"></span>)
+</span></div></code></pre>
+<p>该方法返回当前实例的播放音量。</p>
+<br>
+<ol start="6">
+<li><strong>获取当前播放状态</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">IsPlaying</span>(<span class="hljs-params"></span>)
+</span></div></code></pre>
+<p>该方法返回一个布尔值，<code>true</code> 当音频正在播放， <code>false</code> 当音频已停止。</p>
+<br>
+<p><br><br></p>
+<h3 id="%E6%80%BB%E7%BB%93">总结</h3>
+<p>该系统提供了一个完整的音频对象池系统的实现。重点构建了一个<code>AudioManager</code> 单例类用于提供统一的音频管理接口。 音频设计师应当使用<code>AudioManager</code>提供的公共方法，以确保游戏架构<strong>解耦</strong>，<strong>可扩展</strong>，<strong>易维护</strong>。</p>
+<p><br> <br> <br> <br> <br> <br></p>
+<h1 id="english">ENGLISH</h1>
+<h2 id="unity-audio-pooling-system">Unity Audio Pooling System</h2>
+<h3 id="overview">Overview</h3>
+<p>This system implements pooling for non-attached audio playback in Unity, providing audio designers with:</p>
+<ol>
+<li>Multiple audio instance recycling functionalities to choose from</li>
+<li>Customizable platform-specific audio instance count rules</li>
+<li>A unified and decoupled AudioManager singleton class for providing audio playback entry points</li>
+<li>An AudioEvent class that serves as an extensible audio instance base class</li>
+</ol>
+<p><br> <br></p>
+<h3 id="usage-instructions">Usage Instructions</h3>
+<h4 id="audioconfig">AudioConfig</h4>
+<p><code>AudioConfig</code> defines audio-related settings. Designers can create a Scriptable Object by navigating to <code>Asset (folder) → Scriptable Object → AudioConfig</code>.
+<br></p>
+<h5 id="fields">Fields</h5>
+<p>This programmable object contains <code>2</code> <em><strong>public fields</strong></em>:</p>
+<ol>
+<li><code>AudioRecycleStrategy recycleStrategy</code> is used to define the audio instance recycling strategy. This system provides <code>3</code> recycling strategies: <code>ByTime</code>, <code>ByVolume</code>, and <code>ByDistance</code>.
+<br>
+<code>ByTime</code> allows the system to recycle instances in the order of <strong>audio playback time</strong> (from earliest start to latest start).
+<code>ByVolume</code> allows the system to recycle instances based on <strong>audio volume</strong> (from lowest to highest volume). If volumes are the same, recycling follows a random default order.
+<code>ByDistance</code> allows the system to recycle instances based on their <strong>distance from the player</strong> (from farthest to nearest). If distances are the same, recycling follows a random default order.
+<br><br></li>
+<li><code>List&lt;PlatformObjectNumber&gt; objectPerPlatform</code>
+<br>
+This list allows designers to set the <strong>maximum number of audio instances per platform</strong> in the Unity inspector.
+The <code>struct PlatformObjectNumber</code> identifies the maximum number of audio instances allowed for specific platforms. Designers can select multiple platforms to match the same instance count here.
+<br><br></li>
+</ol>
+<h5 id="methods">Methods</h5>
+<p>This programmable object also contains <code>1</code> <em><strong>public method</strong></em>:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetMaxNumber</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method automatically returns the maximum number of instances allowed for the <code>current platform</code>.</p>
+<pre class="hljs"><code><div>Example
+
+Designer set:
+    Android &amp; iPhone =&gt; 10
+    Windows &amp; Linux =&gt; 30
+    PS4 &amp; PS5 =&gt; 25
+
+Current platform:
+    Windows
+
+GetMaxNumber()：
+    Returns 30
+</div></code></pre>
+<p><br> <br><br></p>
+<h4 id="audiomanager">AudioManager</h4>
+<p><code>AudioManager</code> is a singleton class. Designers can provide a configured <code>AudioConfig</code> to have it handle audio-related events according to the predetermined scheme.
+<br></p>
+<h5 id="fields">Fields</h5>
+<p><code>AudioManager</code> holds <code>2</code> <em><strong>public fields</strong></em>:</p>
+<ol>
+<li><code>AudioConfig config</code> is used to configure audio-related settings in the current scene. Designers can directly drag a configured <code>AudioConfig</code> into this field in the Unity inspector.
+<br><br></li>
+<li><code>AudioEvent audioEventPrefab</code> is used to generate audio playback instances. Designers can drag any prefab with an <code>AudioEvent</code> component attached into this field.
+<br></li>
+</ol>
+<h5 id="methods">Methods</h5>
+<p><code>AudioManager</code> holds <code>4</code> <em><strong>public methods</strong></em>:</p>
+<ol>
+<li><strong>Play</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> AudioEvent <span class="hljs-title">Play</span>(<span class="hljs-params">
+        AudioClip clip,
+        Vector3 position,
+        <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">false</span>,
+        <span class="hljs-keyword">float</span> volume = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> pitch = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> spatialBlend = <span class="hljs-number">1f</span>,
+        AudioMixerGroup mixerGroup = <span class="hljs-literal">null</span></span>)</span>;
+</div></code></pre>
+<p>This method provides an entry point for using <code>AudioManager</code> to play audio. When calling this method, designers need to pass in an <code>AudioClip</code> and a <code>Vector3</code>. Other parameters have default values, and designers can fill them in as needed.</p>
+<p>This method returns an <code>AudioEvent</code> instance for handling audio control.</p>
+<blockquote>
+<p>When using this method, it is recommended to use an <code>AudioEvent</code> variable to hold the returned instance.</p>
+</blockquote>
+<br>
+<ol>
+<li><strong>Stop</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params">AudioEvent audioEvent</span>)</span>;
+</div></code></pre>
+<p>This method provides an entry point for using <code>AudioManager</code> to stop currently playing audio. When calling this method, designers need to pass in an <code>AudioEvent</code>.</p>
+<p>For non-looping audio, the system automatically manages and recycles the instance when the audio finishes playing. However, designers can also call this method to stop and recycle non-looping audio early.</p>
+<br>
+<ol start="3">
+<li><strong>Manually Recycle Audio Instances</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ApplyRecycle</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method provides an entry point for using <code>AudioManager</code> to manually recycle current audio instances.</p>
+<p>This method will recycle <code>1</code> <code>AudioEvent</code> instance according to the previously described and set <code>AudioRecycleStrategy</code>.</p>
+<blockquote>
+<p>This public method is provided to designers to offer maximum freedom. However, it is <em><strong>NOT</strong></em> recommended for designers to call this method individually in scripts. In fact, the <code>Play(...)</code> method implementation already automatically manages these instances.</p>
+</blockquote>
+<br>
+<ol start="4">
+<li><strong>Manually Set <code>AudioRecycleStrategy</code></strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">// Set to a specified strategy</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetStrategy</span>(<span class="hljs-params">AudioRecycleStrategy strategy</span>)</span>;
+
+<span class="hljs-comment">// Reset to the strategy specified in Audio Config</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetStrategy</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method provides an entry point for using <code>AudioManager</code> to manually set the audio recycle strategy. Using this entry point, designers can change the audio recycle strategy of <code>AudioManager</code> at runtime.</p>
+<p>This method has <code>2</code> overloads. Designers can set to a specified strategy by passing in an <code>AudioRecycleStrategy</code>, or call the parameterless overload to reset to the strategy specified in <code>AudioConfig</code>.</p>
+<br>
+<h5 id="usage-example">Usage Example</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> AudioClip clip; <span class="hljs-comment">// Audio to be played</span>
+<span class="hljs-keyword">public</span> Vector3 position; <span class="hljs-comment">// Audio playback position</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">true</span>; <span class="hljs-comment">// Looping audio</span>
+
+<span class="hljs-keyword">private</span> AudioEvent _e; <span class="hljs-comment">// Private AudioEvent field to store instance reference</span>
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExampleCallToPlay</span>(<span class="hljs-params"></span>) <span class="hljs-comment">// Play audio</span></span>
+{
+    _e = AudioManager.Instance.Play(
+        clip,
+        position,
+        loop);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExampleCallToStop</span>(<span class="hljs-params"></span>) <span class="hljs-comment">// Stop audio playback</span></span>
+{
+    AudioManager.Instance.Stop(_e);
+}
+
+</div></code></pre>
+<p><br><br></p>
+<h4 id="audioevent">AudioEvent</h4>
+<p><code>AudioEvent</code> class is responsible for the specific playback behavior of audio. When <code>AudioManager.Play(...)</code> is called, an instance of this class is created.</p>
+<p><code>AudioEvent</code> will enforce the binding of an <code>AudioSource</code> to the game object it is attached to. This <code>AudioSource</code> component is responsible for playing the audio.</p>
+<p>This class implements the <code>IPoolable</code> interface, indicating that it is a poolable object.</p>
+<br>
+<h5 id="fields">Fields</h5>
+<p><code>AudioEvent</code> holds <code>2</code> <em><strong>public fields</strong></em>:</p>
+<ol>
+<li><code>OnActive</code> This event is broadcast when the <code>AudioEvent</code> instance is activated. Other scripts can subscribe to this event to be notified when <strong>audio playback</strong> occurs.</li>
+<li><code>OnDeactive</code> This event is broadcast when the <code>AudioEvent</code> instance is deactivated. Other scripts can subscribe to this event to be notified when <strong>audio stops</strong>.
+<br><br></li>
+</ol>
+<h5 id="methods">Methods</h5>
+<p><code>AudioEvent</code> holds <code>8</code> <em><strong>public methods</strong></em>:</p>
+<ol>
+<li><strong>On Spawn</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnSpawn</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p><code>IPoolable</code> interface implementation. This method is called when the instance is activated from the object pool.</p>
+<p>This method is currently empty.</p>
+<br>
+<ol start="2">
+<li><strong>On Despawn</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnDespawn</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p><code>IPoolable</code> interface implementation. This method is called when the instance is deactivated and returned to the object pool.</p>
+<p>This method currently resets all <code>AudioSource</code> parameters.</p>
+<br>
+<ol start="3">
+<li><strong>Play</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Play</span>(<span class="hljs-params">AudioClip clip,
+        Vector3 pos,
+        <span class="hljs-keyword">bool</span> loop = <span class="hljs-literal">false</span>,
+        <span class="hljs-keyword">float</span> volume = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> pitch = <span class="hljs-number">1f</span>,
+        <span class="hljs-keyword">float</span> spatialBlend = <span class="hljs-number">1f</span>,
+        AudioMixerGroup mixerGroup = <span class="hljs-literal">null</span></span>)</span>;
+</div></code></pre>
+<p>This method will play the passed-in audio and configure the <code>AudioSource</code> according to the passed-in parameters.</p>
+<blockquote>
+<p>Although this method is provided, designers should use <code>AudioManager.Play(...)</code> instead of <code>AudioEvent.Play(...)</code>.</p>
+</blockquote>
+<br>
+<ol start="4">
+<li><strong>Stop</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method will stop the audio currently playing on this instance.</p>
+<blockquote>
+<p>Although this method is provided, designers should use <code>AudioManager.Stop(AudioEvent)</code> instead of <code>AudioEvent.Stop()</code>.</p>
+</blockquote>
+<br>
+<ol start="5">
+<li><strong>Get Audio Clip</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> AudioClip <span class="hljs-title">GetAudioClip</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method returns the reference to the audio currently playing.</p>
+<br>
+<ol start="6">
+<li><strong>Get Position</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> Vector3 <span class="hljs-title">GetPosition</span>(<span class="hljs-params"></span>)</span>;
+</div></code></pre>
+<p>This method returns the position of the current instance.</p>
+<br>
+<ol start="6">
+<li><strong>Get Volume</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">GetVolume</span>(<span class="hljs-params"></span>)
+</span></div></code></pre>
+<p>This method returns the playback volume of the current instance.</p>
+<br>
+<ol start="6">
+<li><strong>Get Playing Status</strong></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">IsPlaying</span>(<span class="hljs-params"></span>)
+</span></div></code></pre>
+<p>This method returns a boolean value, <code>true</code> when the audio is playing, and <code>false</code> when the audio has stopped.</p>
+<br>
+<p><br><br></p>
+<h3 id="summary">Summary</h3>
+<p>This system provides a complete implementation of an audio object pool system. It focuses on constructing a singleton class <code>AudioManager</code> to provide a unified audio management interface. Audio designers should use the public methods provided by <code>AudioManager</code> to ensure the game architecture is <strong>decoupled</strong>, <strong>extensible</strong>, and <strong>maintainable</strong>.</p>
+<p><br> <br> <br> <br> <br> <br>
+由李江浩创作
+Created by Jianghao Li</p>
+
+</body>
+</html>
